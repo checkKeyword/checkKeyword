@@ -1,30 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
+import React from 'react'
 
-function ResultPage() {
+function ResultPage(props) {
+  const result = props.result;
 
-  const [UrlResult, setUrlResult] = useState("")
+  let resultArray = Object.keys(result).map(function (key) { 
+    return [String(key), result[key]]; 
+  }); 
 
-  useEffect(() => {
-    // axios.get('/api/keyword')
-    //   .then(res => {
-    //       if (res.data.success) {
-    //         setUrlResult(res.data.result)
-    //       } else {
-    //         alert('Url Error.')
-    //       }
-    //   })
-  }, [])
+  function shuffledArray(array) {
+    array.sort(() => Math.random() - 0.5);
+  }
+
+  shuffledArray(resultArray)
   
   return (
     
-    <div style={{ height: '100vh' }}>
-      {UrlResult ? (<div>
-      <h2 style={{ display: 'flex', justifyContent: 'center', marginBottom: '50px', marginTop: '50px' }}>Result</h2>
-      <div>{ UrlResult }</div>
-    </div>) : ( <div style={{ display: 'flex', justifyContent: 'center', fontSize: '50px', alignItems: 'center', height: '100%' }}>Loading...</div> )}
+    <div style={{ height: '100vh', marginLeft: '25px', marginRight: '25px'}}>
+      <div>
+        <h2 style={{ display: 'flex', justifyContent: 'center', marginBottom: '50px', marginTop: '50px' }}>Keyword Result</h2>
+        <div>
+          {
+            resultArray.map(word => (
+                <span style={{ fontSize: `${(word[1]+2)*40}%` }}>{word[0]} </span>
+            ))
+          }
+        </div>
+      </div>
     </div>
-    
   )
 }
 

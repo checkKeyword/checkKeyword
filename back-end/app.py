@@ -1,12 +1,11 @@
 # 플라스크 rest-api 생성
 from flask import Flask, request
 import json
-from checkKeyword import textExtract
+import textExtract
 
 #from flask_cors import CORS
 ## 서버 띄우고 접속 허용
 app = Flask(__name__)
-
 # 보안관련
 #CORS(app)
 
